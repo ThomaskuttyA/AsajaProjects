@@ -14,6 +14,8 @@ interface RegisterResponse {
 export class RegisterComponent {
   username: string = '';
   password: string = '';
+  mobile:string='';
+  email:string='';
   loading: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -21,7 +23,7 @@ export class RegisterComponent {
   register() {
     this.loading = true; // Start loading state
 
-    const payload = { username: this.username, password: this.password };
+    const payload = { username: this.username, password: this.password , mobile: this.mobile,email:this.email };
     console.log('Sending registration data:', payload);
 
     this.http.post<RegisterResponse>('http://localhost/thomasapp-api/register.php', payload)
@@ -34,7 +36,7 @@ export class RegisterComponent {
           alert(response.message);
         }
       }, error => {
-        this.loading = false; 
+        this.loading = false;
         alert('An error occurred during registration. Please try again later.'); // Show alert for network or server error
       });
   }
