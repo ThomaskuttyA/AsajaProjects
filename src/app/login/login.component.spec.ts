@@ -1,25 +1,44 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+
+interface LoginResponse {
+  success: boolean;
+  username?: string;
+  message?: string;
+}
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
-    username: string = '';
-    password: string = '';
+  username: string = '';
+  password: string = '';
+  loading: boolean = false;
+  errorMessage: string = '';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
-    login() {
-        this.http.post('http://localhost/thomasapp-api/login.php', { username: this.username, password: this.password })
-            .subscribe((response: any) => {
-                if (response.success) {
-                    console.log('Login successful!');
-                   
-                } else {
-                    console.log('Invalid credentials.');
-                }
-            });
-    }
+  login() {
+    this.loading = true; // Start loading
+    this.errorMessage = ''; // Reset error message
+
+    const payload = { username: this.username, password: this.password };
+
+    this.http.post<LoginResponse>('http://localhost/thomasapp-api/login.php', payload)
+      .subscribe(response => {
+        this.loading = false; // Stop loading
+        if (response && response.success) {
+          this.userService.setUsername(response.username!);
+          this.router.navigate(['/main']);
+        } else {
+          this.errorMessage = response.message || 'Login failed. Please try again.'; // Set error message
+        }
+      }, error => {
+        this.loading = false; // Stop loading
+        this.errorMessage = 'An error occurred during login. Please try again later.';
+      });
+  }
 }

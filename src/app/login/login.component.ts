@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -27,7 +26,7 @@ export class LoginComponent {
           // Optionally, reset the form here
           this.username = '';
           this.password = '';
-          
+
         } else {
           this.errorMessage = response.message || 'Login failed. Please try again.';
           alert(this.errorMessage); // Show error alert
