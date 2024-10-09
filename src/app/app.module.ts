@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { TodolistComponent } from './todolist/todolist.component';
 
 
 
@@ -16,6 +17,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
     LoginComponent,
     RegisterComponent,
     MainpageComponent,
+    TodolistComponent,
 
   ],
   imports: [

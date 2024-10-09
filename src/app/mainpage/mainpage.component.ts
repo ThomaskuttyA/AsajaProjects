@@ -19,6 +19,10 @@ export class MainpageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  goToTodoList() {
+    this.router.navigate(['/todolist']); // Ensure this matches your routing setup
+  }
+
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
@@ -26,5 +30,5 @@ export class MainpageComponent implements OnInit {
     this.phoneNumber = localStorage.getItem('phoneNumber');
   }
 
- 
+
 }
