@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Thomasservice } from '../service/thomasservice.service';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -34,4 +37,7 @@ export class LoginComponent {
         //console.error('Error during login:', error);
       });
   }
+
 }
+
+
