@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mainpage',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mainpage.component.css']
 })
 export class MainpageComponent implements OnInit {
+  username: string | null = '';
+  email: string | null = '';
+  phoneNumber: string | null = '';
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  ngOnInit(): void {
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+    this.email = localStorage.getItem('email');
+    this.phoneNumber = localStorage.getItem('phoneNumber');
+  }
 }

@@ -11,15 +11,19 @@
 
 <div class="container py-5">
   <div class="border p-5 rounded" style="max-width: 400px; margin: auto;"> <!-- Set max width and center -->
-
+<form (ngSubmit)="logout()">
 
 YOU HAVE SUCCESSFULLY LOGED IN
-Name :     <br>
-Email :   <br>
-Phone Number :   <br>
-<button type="submit" class="btn btn-success w-100">Login Here</button>
+Name :   {{ username }}   <br>
+Email : {{email}}  <br>
+Phone Number : {{phoneNumber}}  <br>
 
 
+
+
+<button type="submit" class="btn btn-success w-100 ">Login Here</button>
+
+</form>
    </div>
 </div>
 
