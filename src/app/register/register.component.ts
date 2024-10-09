@@ -31,10 +31,10 @@ export class RegisterComponent {
         if (response && response.success) {
           this.goToLogin();
         } else {
-          alert(response.message); // Show alert for username already taken or any other failure
+          alert(response.message);
         }
       }, error => {
-        this.loading = false; // End loading state
+        this.loading = false; 
         alert('An error occurred during registration. Please try again later.'); // Show alert for network or server error
       });
   }
