@@ -9,7 +9,7 @@ interface RegisterResponse {
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
 })
 export class RegisterComponent {
   username: string = '';

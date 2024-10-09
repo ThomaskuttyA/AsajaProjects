@@ -26,7 +26,5 @@ export class MainpageComponent implements OnInit {
     this.phoneNumber = localStorage.getItem('phoneNumber');
   }
 
-  goToTodoList() {
-      this.router.navigate(['/todo-list'])}
-
+ 
 }
