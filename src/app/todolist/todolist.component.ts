@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todolist.component.css']
 })
 export class TodolistComponent implements OnInit {
-
+  username: string | null = '';
   constructor() { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('username');
   }
 
 }

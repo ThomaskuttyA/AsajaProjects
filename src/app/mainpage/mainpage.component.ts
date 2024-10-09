@@ -19,9 +19,14 @@ export class MainpageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
     this.email = localStorage.getItem('email');
     this.phoneNumber = localStorage.getItem('phoneNumber');
   }
+
+  goToTodoList() {
+      this.router.navigate(['/todo-list'])}
+
 }
