@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+
 
 interface LoginResponse {
   success: boolean;
@@ -19,7 +19,7 @@ export class LoginComponent {
   loading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login() {
     this.loading = true; // Start loading

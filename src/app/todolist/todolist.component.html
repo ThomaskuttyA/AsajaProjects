@@ -1,13 +1,15 @@
 <div class="container bg-dark text-center">
-  <h2 class="display-4">TO DO LIST OF</h2>
+  <h2 class="display-4 text-white">TO DO LIST OF</h2>
   <p class="text-success display-5">{{ username }}</p>
 
-  <form>
+  <form (ngSubmit)="addtask()">
     <div class="form-group">
       <input
         type="text"
+        [(ngModel)]="taskname"
+        name="taskname"
         class="form-control"
-        id="taskInput"
+        id="taskname"
         placeholder="Enter task name"
         required
       />
@@ -18,7 +20,30 @@
 
   <hr/>
 
+  <table class="table table-light">
+    <thead>
+      <tr>
+        <th>SL No</th>
+        <th>Task Name</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ task.taskname }}</td>
+        <td>{{ task.status === 0 ? 'Pending' : 'Completed' }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="changeStatus(i)">CHANGE STATUS</button>
 
-  <button type="submit" class="btn btn-danger w-100 ">LOGOUT HERE</button>
-  <br> <br>
+
+          <button class="btn btn-danger" (click)="deleteTask(i)">DELETE TASK</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="submit" class="btn btn-danger w-100" (click)="logout()">LOGOUT HERE</button>
+  <br><br>
 </div>
