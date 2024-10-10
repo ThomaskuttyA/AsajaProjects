@@ -8,7 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { TodolistComponent } from './todolist/todolist.component';
-
+import { LoginService } from './services/login.service';
+import { RegisterService } from './services/register.service';
+import { MainpageService } from './services/mainpage.service';
 
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-login',
@@ -9,18 +9,12 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  email:string='';
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   login() {
-    const payload = { username: this.username, password: this.password };
-
-    this.http.post<{ success: boolean, message?: string, username?: string, email?: string, phoneNumber?: string }>(
-      'http://localhost/thomasapp-api/login.php',
-      payload
-    ).subscribe(response => {
+    this.loginService.login(this.username, this.password).subscribe(response => {
       if (response.success) {
         // Store user details in localStorage
         localStorage.setItem('username', response.username!);

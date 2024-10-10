@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MainpageService } from '../services/mainpage.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -12,23 +12,34 @@ export class MainpageComponent implements OnInit {
   email: string | null = '';
   phoneNumber: string | null = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private mainpageService: MainpageService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+    if (this.username) {
+      this.mainpageService.getUserInfo(this.username).subscribe(
+        response => {
+          if (response.success) {
+            this.email = response.email;
+            this.phoneNumber = response.phoneNumber;
+          } else {
+            console.error('Error fetching user info:', response.message);
+          }
+        },
+        error => {
+          console.error('Error fetching user info', error);
+        }
+      );
+    }
+  }
 
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
 
+  // Ensure this method matches the HTML template
   goToTodoList() {
-    this.router.navigate(['/todolist']); // Ensure this matches your routing setup
+    this.router.navigate(['/todolist']);
   }
-
-
-  ngOnInit(): void {
-    this.username = localStorage.getItem('username');
-    this.email = localStorage.getItem('email');
-    this.phoneNumber = localStorage.getItem('phoneNumber');
-  }
-
-
 }

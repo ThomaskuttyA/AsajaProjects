@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +18,7 @@
           [(ngModel)]="username"
           name="username"
           class="form-control"
-          placeholder="User Name"
+          placeholder="Username"
           required
         />
       </div>
@@ -33,9 +32,9 @@
           required
         />
       </div>
-      <div class="mb-3"> <!-- new-->
+      <div class="mb-3">
         <input
-          type="text"
+          type="email"
           [(ngModel)]="email"
           name="email"
           class="form-control"
@@ -43,26 +42,23 @@
           required
         />
       </div>
-
       <div class="mb-3">
         <input
           type="text"
           [(ngModel)]="mobile"
-          name="mob"
+          name="mobile"
           class="form-control"
           placeholder="Mobile Number"
           required
         />
       </div>
-
-
       <button type="submit" class="btn btn-success w-100">Register</button>
     </form>
-    <p class="mt-3 text-center">Already have an account? <button (click)="goToLogin()" class="btn btn-link">Login here</button></p>
+
+    <p class="mt-3 text-center">Already have an account? <a routerLink="/login" class="btn btn-link">Login here</a></p>
   </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

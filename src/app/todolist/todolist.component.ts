@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TodoService } from '../services/todo.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-todolist',
@@ -12,7 +12,7 @@ export class TodolistComponent implements OnInit {
   taskname: string = '';
   tasks: { id: number, taskname: string, status: number }[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private todoService: TodoService, private router: Router) { }
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
@@ -20,10 +20,7 @@ export class TodolistComponent implements OnInit {
   }
 
   loadTasks() {
-    const payload = { username: this.username };
-    this.http.post<{ tasks: { id: number, taskname: string, status: number }[] }>(
-      'http://localhost/thomasapp-api/gettast.php', payload
-    ).subscribe(
+    this.todoService.loadTasks(this.username!).subscribe(
       response => {
         this.tasks = response.tasks;
       },
@@ -34,15 +31,12 @@ export class TodolistComponent implements OnInit {
   }
 
   addtask() {
-    const payload = { username: this.username, taskname: this.taskname };
     if (!this.taskname) {
       console.error("Task name is empty!");
       return; // Prevent sending empty task name
     }
 
-    this.http.post<{ success: boolean; message: string }>(
-      'http://localhost/thomasapp-api/addtask.php', payload
-    ).subscribe(
+    this.todoService.addTask(this.username!, this.taskname).subscribe(
       response => {
         if (response.success) {
           console.log('Task added!', response.message);
@@ -61,11 +55,8 @@ export class TodolistComponent implements OnInit {
   changeStatus(index: number) {
     const taskId = this.tasks[index].id;
     const newStatus = this.tasks[index].status === 0 ? 1 : 0; // Toggle status
-    const payload = { id: taskId, status: newStatus }; // Prepare payload
 
-    this.http.post<{ success: boolean; message: string }>(
-      'http://localhost/thomasapp-api/changestatus.php', payload
-    ).subscribe(
+    this.todoService.changeStatus(taskId, newStatus).subscribe(
       response => {
         if (response.success) {
           console.log('Status changed!', response.message);
@@ -83,14 +74,12 @@ export class TodolistComponent implements OnInit {
 
   deleteTask(index: number) {
     const taskId = this.tasks[index].id; // Get task ID for deletion
-    this.http.post<{ success: boolean; message: string }>(
-      `http://localhost/thomasapp-api/deletetask.php`, taskId
-    ).subscribe(
+
+    this.todoService.deleteTask(taskId).subscribe(
       response => {
         if (response.success) {
           console.log('Task deleted!', response.message);
-
-          this.loadTasks(); // Remove the task from the local array
+          this.loadTasks(); // Reload tasks after deletion
         } else {
           console.error('Error deleting task', response.message);
         }
@@ -105,4 +94,7 @@ export class TodolistComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+
+
+ 
 }
