@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { AuthGuard } from './gurds/auth.guard';
 import { TodolistComponent } from './todolist/todolist.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {path:'todolist', component: TodolistComponent},
- 
+ {path:'home',component:MainpageComponent},
+ {path:'changepassword',component:ChangepasswordComponent},
   { path: 'mainpage', component: MainpageComponent,canActivate:[AuthGuard] },
 
 ];

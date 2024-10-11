@@ -42,4 +42,12 @@ export class MainpageComponent implements OnInit {
   goToTodoList() {
     this.router.navigate(['/todolist']);
   }
+
+  gotochangepassword()
+  {
+    this.router.navigate(['/changepassword']);
+  }
+
+
+
 }

@@ -11,6 +11,9 @@ import { TodolistComponent } from './todolist/todolist.component';
 import { LoginService } from './services/login.service';
 import { RegisterService } from './services/register.service';
 import { MainpageService } from './services/mainpage.service';
+import { ChangepasswordService } from "./services/changepassword.service";
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+
 
 
 @NgModule({
@@ -20,6 +23,7 @@ import { MainpageService } from './services/mainpage.service';
     RegisterComponent,
     MainpageComponent,
     TodolistComponent,
+    ChangepasswordComponent,
 
   ],
   imports: [

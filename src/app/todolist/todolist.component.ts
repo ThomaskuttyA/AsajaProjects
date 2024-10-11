@@ -95,6 +95,10 @@ export class TodolistComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  gotohome(){
+    this.router.navigate(['/home']);
+  }
 
- 
+
+
 }
